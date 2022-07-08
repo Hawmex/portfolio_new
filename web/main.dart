@@ -46,7 +46,10 @@ class AppState extends State<App> {
                 ),
                 const Text(
                   'Hamed Aarab',
-                  style: Style({'font-variation-settings': '"wght" 600'}),
+                  style: Style({
+                    'font-variation-settings': '"wght" 600',
+                    'color': 'rgb(var(--accent-color))',
+                  }),
                 )
               ],
               style: const Style({
@@ -69,7 +72,7 @@ class AppState extends State<App> {
               icon: 'open_in_new',
               onPress: (final event) => window.open(
                 'https://github.com/Hawmex',
-                'Hawmex on GitHub',
+                'Hamed Aarab\'s GitHub',
               ),
             ),
           ],
@@ -97,9 +100,9 @@ class AppState extends State<App> {
         const BottomBar([Text('© Hamed Aarab, All Rights Reserved.')]),
       ],
       style: Style({
-        '--accent-color': '174 42 255',
+        '--accent-color': '0 137 123',
         '--on-accent-color': '255 255 255',
-        '--link-color': '0 136 196',
+        '--link-color': '30 136 229',
         '--surface-color': appStore.darkMode ? '0 0 0' : '255 255 255',
         '--on-surface-color': appStore.darkMode ? '255 255 255' : '0 0 0',
         'font-family': 'Jost VF',
@@ -108,6 +111,7 @@ class AppState extends State<App> {
         'height': '100vh',
         'overflow': 'hidden',
         'display': 'grid',
+        'accent-color': 'rgb(var(--accent-color))',
         'grid-template-rows': 'max-content 1fr max-content',
         'background': 'rgb(var(--surface-color))',
         'color': 'rgb(var(--on-surface-color))',
