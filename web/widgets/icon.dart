@@ -35,6 +35,7 @@ class Icon extends StatelessWidget implements Text {
   Widget build(final Context context) {
     return Text(
       value,
+      key: value,
       onPointerDown: onPointerDown,
       onPointerUp: onPointerUp,
       onPointerEnter: onPointerEnter,
@@ -44,7 +45,7 @@ class Icon extends StatelessWidget implements Text {
           const Animation(
             keyframes: [
               {'transform': 'rotate(-90deg)'},
-              {'transform': 'scale(0deg)'},
+              {'transform': 'rotate(0deg)'},
             ],
             options: {
               'duration': 300,

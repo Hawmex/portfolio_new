@@ -2,68 +2,34 @@ import 'dart:html';
 
 import 'package:dawn/dawn.dart';
 
+import 'components/about_me.dart';
+import 'components/some_of_my_projects.dart';
+import 'widgets/bottom_bar.dart';
 import 'widgets/button.dart';
-import 'widgets/heading.dart';
-import 'widgets/icon.dart';
-import 'widgets/link.dart';
-import 'widgets/subheading.dart';
 import 'widgets/top_bar.dart';
+
+final appStore = AppStore();
 
 void main() => runApp(const App());
 
-class App extends StatelessWidget {
+class AppStore extends Store {
+  bool darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  void toggleDarkMode() => setState(() => darkMode = !darkMode);
+}
+
+class App extends StatefulWidget {
   const App({super.key});
 
-  List<Widget> aboutMe() {
-    return const [
-      Heading(Text('🙋‍♂️ About Me')),
-      Text(
-        'I\'m currently studying B.Sc. Industrial Engineering '
-        'at Amirkabir University of Technology (Tehran Polytechnic).',
-      ),
-      Text(
-        'I\'m also interested in programming, '
-        'especially in front-end development.',
-      )
-    ];
-  }
+  @override
+  State createState() => AppState();
+}
 
-  List<Widget> someOfMyProjects() {
-    return const [
-      Heading(Text('📄 Some of My Projects')),
-      SubHeading(Link(
-        text: 'Dawn Framework',
-        url: 'https://github.com/Hawmex/dawn',
-      )),
-      Text(
-        'Dawn is a Dart Web Framework that lets developers to develop '
-        'UIs with a widget model similar to Flutter. Dawn applications '
-        'are compiled to JavaScript and are painted using HTML and CSS.',
-      ),
-      Text(
-        'This portfolio is made with Dawn :)',
-        style: Style({'font-family': '700'}),
-      ),
-      SubHeading(Link(
-        text: 'Health Team Shopping App',
-        url: 'https://healthteam.herokuapp.com',
-      )),
-      Text(
-        'Health Team is a Full-Stack PWA that uses web components '
-        'in front-end and MongoDB, Mongoose, and ExpressJS in '
-        'back-end. IDPay APIs are used in payment services.',
-      ),
-      Image(
-        '/assets/images/health-team-app-home.png',
-        style: Style({
-          'width': '512px',
-          'max-width': '100%',
-          'align-self': 'center',
-          'margin-top': '4px',
-          'border-radius': '8px',
-        }),
-      )
-    ];
+class AppState extends State<App> {
+  @override
+  void initialize() {
+    super.initialize();
+    appStore.onUpdate(() => setState(() {}));
   }
 
   @override
@@ -71,23 +37,27 @@ class App extends StatelessWidget {
     return Container(
       [
         TopBar(
-          leading: const [
+          leading: [
             Container(
               [
-                Icon('code'),
-                Text('Hamed Aarab', style: Style({'font-weight': '600'}))
+                Button(
+                  icon: appStore.darkMode ? 'dark_mode' : 'light_mode',
+                  onPress: (final event) => appStore.toggleDarkMode(),
+                ),
+                const Text(
+                  'Hamed Aarab',
+                  style: Style({'font-variation-settings': '"wght" 600'}),
+                )
               ],
-              style: Style({
+              style: const Style({
                 'display': 'flex',
-                'gap': '16px',
-                'padding': '8px',
+                'gap': '24px',
                 'align-items': 'center',
               }),
             ),
           ],
           trailing: [
             Button(
-              text: 'Email',
               icon: 'email',
               onPress: (final event) => window.open(
                 'mailto:hamed.aarab.02@gmail.com',
@@ -105,17 +75,13 @@ class App extends StatelessWidget {
           ],
         ),
         Container(
-          [
-            ...aboutMe(),
-            ...someOfMyProjects(),
-          ],
+          [...aboutMe(), ...someOfMyProjects()],
           style: const Style({
             'display': 'flex',
             'flex-flow': 'column',
             'gap': '8px',
             'padding': '16px',
             'overflow-y': 'auto',
-            'opacity': '0',
           }),
           animation: const Animation(
             keyframes: [
@@ -124,22 +90,28 @@ class App extends StatelessWidget {
             ],
             options: {
               'duration': 300,
-              'delay': 300,
-              'fill': 'forwards',
               'easing': 'cubic-bezier(0.4, 0, 0.2, 1)',
             },
           ),
         ),
+        const BottomBar([Text('© Hamed Aarab, All Rights Reserved.')]),
       ],
-      style: const Style({
+      style: Style({
+        '--accent-color': '174 42 255',
+        '--on-accent-color': '255 255 255',
+        '--link-color': '0 136 196',
+        '--surface-color': appStore.darkMode ? '0 0 0' : '255 255 255',
+        '--on-surface-color': appStore.darkMode ? '255 255 255' : '0 0 0',
         'font-family': 'Jost VF',
         'font-size': '16px',
         'width': '100vw',
         'height': '100vh',
+        'overflow': 'hidden',
         'display': 'grid',
-        'grid-template-rows': 'max-content 1fr',
-        'background': '#001828',
-        'color': '#ffffff',
+        'grid-template-rows': 'max-content 1fr max-content',
+        'background': 'rgb(var(--surface-color))',
+        'color': 'rgb(var(--on-surface-color))',
+        'transition': 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
       }),
     );
   }

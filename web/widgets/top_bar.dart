@@ -9,17 +9,15 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(final Context context) {
     return Container(
-      [
-        Stack(leading),
-        Stack(trailing),
-      ],
+      [Stack(leading), Stack(trailing)],
       style: const Style({
         'display': 'flex',
         'justify-content': 'space-between',
         'padding': '8px',
         'gap': '8px',
-        'background': 'rgba(0, 0, 0, 0.16)',
         'align-items': 'center',
+        'background': 'rgb(var(--on-surface-color) / 0.08)',
+        'box-shadow': '0px 0px 3px 1px rgb(var(--on-surface-color) / 0.08)',
       }),
       animation: const Animation(
         keyframes: [

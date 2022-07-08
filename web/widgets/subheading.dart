@@ -11,7 +11,7 @@ class SubHeading extends StatelessWidget {
       [child],
       style: const Style({
         'font-size': '18px',
-        'font-weight': '600',
+        'font-variation-settings': '"wght" 600',
         'margin-top': '8px',
         'line-height': '1',
       }),

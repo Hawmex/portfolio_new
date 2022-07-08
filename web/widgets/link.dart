@@ -19,7 +19,7 @@ class Link extends StatelessWidget {
         'display': 'inline-flex',
         'gap': '8px',
         'align-items': 'center',
-        'color': '#00b1ff',
+        'color': 'rgb(var(--link-color))',
         'cursor': 'pointer',
       }),
     );

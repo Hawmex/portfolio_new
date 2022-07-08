@@ -3,13 +3,13 @@ import 'package:dawn/dawn.dart';
 import 'icon.dart';
 
 class Button extends StatefulWidget {
-  final String text;
-  final String icon;
+  final String? text;
+  final String? icon;
   final EventListener? onPress;
 
   const Button({
-    required this.text,
-    required this.icon,
+    this.text,
+    this.icon,
     this.onPress,
     super.key,
   });
@@ -19,47 +19,61 @@ class Button extends StatefulWidget {
 }
 
 class ButtonState extends State<Button> {
-  String background = 'transparent';
-  String transitionDuration = '250ms';
+  String overlayBackground = 'transparent';
+  String overlayTransitionDuration = '250ms';
 
   @override
   Widget build(final Context context) {
     return Container(
       [
-        Icon(widget.icon),
-        Text(widget.text),
+        if (widget.icon != null) Icon(widget.icon!, key: widget.icon!),
+        if (widget.text != null) Text(widget.text!),
+        Container(
+          [],
+          style: Style({
+            'position': 'absolute',
+            'width': '100%',
+            'height': '100%',
+            'left': '0px',
+            'top': '0px',
+            'pointer-events': 'none',
+            'background': overlayBackground,
+            'transition':
+                'background $overlayTransitionDuration cubic-bezier(0.4, 0, 0.2, 1)',
+          }),
+        ),
       ],
       onPointerEnter: (final event) => setState(() {
-        background = 'rgba(255, 255, 255, 0.08)';
-        transitionDuration = '300ms';
+        overlayBackground = 'rgb(var(--accent-color) / 0.08)';
+        overlayTransitionDuration = '300ms';
       }),
       onPointerLeave: (final event) => setState(() {
-        background = 'transparent';
-        transitionDuration = '250ms';
+        overlayBackground = 'transparent';
+        overlayTransitionDuration = '250ms';
       }),
       onPointerDown: (final event) => setState(() {
-        background = 'rgba(255, 255, 255, 0.16)';
-        transitionDuration = '300ms';
+        overlayBackground = 'rgb(var(--accent-color) / 0.16)';
+        overlayTransitionDuration = '300ms';
       }),
       onPointerUp: (final event) => setState(() {
-        background = 'rgba(255, 255, 255, 0.08)';
-        transitionDuration = '250ms';
+        overlayBackground = 'rgb(var(--accent-color) / 0.08)';
+        overlayTransitionDuration = '250ms';
       }),
       onPress: widget.onPress,
       style: Style({
         'display': 'flex',
+        'position': 'relative',
         'width': 'max-content',
         'align-items': 'center',
+        'overflow': 'hidden',
         'padding': '8px',
-        'background': background,
+        'background': 'transparent',
         'pointer-events': widget.onPress == null ? 'none' : 'all',
-        'color':
-            widget.onPress == null ? 'rgba(255, 255, 255, 0.64)' : '#ffffff',
-        'transition':
-            'background $transitionDuration cubic-bezier(0.4, 0, 0.2, 1)',
-        'font-weight': '500',
+        'color': 'rgb(var(--accent-color))',
+        'opacity': widget.onPress == null ? '0.64' : '1',
+        'font-variation-settings': '"wght" 500',
         'user-select': 'none',
-        'border-radius': '8px',
+        'border-radius': widget.text == null ? '50%' : '8px',
         'cursor': 'pointer',
         'gap': '8px',
       }),
