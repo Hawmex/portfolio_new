@@ -26,7 +26,7 @@ class ButtonState extends State<Button> {
   Widget build(final Context context) {
     return Container(
       [
-        if (widget.icon != null) Icon(widget.icon!, key: widget.icon!),
+        if (widget.icon != null) Icon(widget.icon!),
         if (widget.text != null) Text(widget.text!),
         Container(
           [],

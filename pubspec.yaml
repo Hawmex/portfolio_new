@@ -3,5 +3,5 @@ description: A Dawn app
 publish_to: none
 environment:
   sdk: ">=2.17.0 <3.0.0"
-dependencies: {dawn: ^2.5.2}
-dev_dependencies: {dawn_lints: ^2.0.1}
+dependencies: { dawn: ^2.5.3 }
+dev_dependencies: { dawn_lints: ^2.0.1 }
