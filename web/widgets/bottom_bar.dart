@@ -19,14 +19,12 @@ class BottomBar extends StatelessWidget {
         'box-shadow': '0px 0px 3px 1px rgb(var(--on-surface-color) / 0.08)',
       }),
       animation: const Animation(
-        keyframes: [
-          {'transform': 'translateY(100%)'},
-          {'transform': 'translateY(0%)'},
+        [
+          Style({'transform': 'translateY(100%)'}),
+          Style({'transform': 'translateY(0%)'}),
         ],
-        options: {
-          'duration': 300,
-          'easing': 'cubic-bezier(0.4, 0, 0.2, 1)',
-        },
+        duration: Duration(milliseconds: 300),
+        easing: Easing.cubicBezier(0.4, 0, 0.2, 1),
       ),
     );
   }

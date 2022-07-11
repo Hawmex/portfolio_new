@@ -43,14 +43,12 @@ class Icon extends StatelessWidget implements Text {
       onPress: onPress,
       animation: animation ??
           const Animation(
-            keyframes: [
-              {'transform': 'rotate(-90deg)'},
-              {'transform': 'rotate(0deg)'},
+            [
+              Style({'transform': 'rotate(-90deg)'}),
+              Style({'transform': 'rotate(0deg)'}),
             ],
-            options: {
-              'duration': 300,
-              'easing': 'cubic-bezier(0.4, 0, 0.2, 1)',
-            },
+            duration: Duration(milliseconds: 300),
+            easing: Easing.cubicBezier(0.4, 0, 0.2, 1),
           ),
       style: Style({
         'font-family': 'Material Icons',

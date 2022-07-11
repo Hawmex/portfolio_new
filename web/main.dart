@@ -87,14 +87,12 @@ class AppState extends State<App> {
             'overflow-y': 'auto',
           }),
           animation: const Animation(
-            keyframes: [
-              {'opacity': '0'},
-              {'opacity': '1'},
+            [
+              Style({'opacity': '0'}),
+              Style({'opacity': '1'}),
             ],
-            options: {
-              'duration': 300,
-              'easing': 'cubic-bezier(0.4, 0, 0.2, 1)',
-            },
+            duration: Duration(milliseconds: 300),
+            easing: Easing.cubicBezier(0.4, 0, 0.2, 1),
           ),
         ),
         const BottomBar([Text('© Hamed Aarab, All Rights Reserved.')]),
