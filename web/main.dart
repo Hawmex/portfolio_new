@@ -8,15 +8,7 @@ import 'widgets/bottom_bar.dart';
 import 'widgets/button.dart';
 import 'widgets/top_bar.dart';
 
-final appStore = AppStore();
-
 void main() => runApp(const App());
-
-class AppStore extends Store {
-  bool darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  void toggleDarkMode() => setState(() => darkMode = !darkMode);
-}
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -26,11 +18,9 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  @override
-  void initialize() {
-    super.initialize();
-    appStore.onUpdate(() => setState(() {}));
-  }
+  bool darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  void toggleDarkMode() => setState(() => darkMode = !darkMode);
 
   @override
   Widget build(final Context context) {
@@ -41,8 +31,8 @@ class AppState extends State<App> {
             Container(
               [
                 Button(
-                  icon: appStore.darkMode ? 'dark_mode' : 'light_mode',
-                  onPress: (final event) => appStore.toggleDarkMode(),
+                  icon: darkMode ? 'dark_mode' : 'light_mode',
+                  onPress: (final event) => toggleDarkMode(),
                 ),
                 const Text(
                   'Hamed Aarab',
@@ -101,8 +91,8 @@ class AppState extends State<App> {
         '--accent-color': '0 137 123',
         '--on-accent-color': '255 255 255',
         '--link-color': '30 136 229',
-        '--surface-color': appStore.darkMode ? '0 0 0' : '255 255 255',
-        '--on-surface-color': appStore.darkMode ? '255 255 255' : '0 0 0',
+        '--surface-color': darkMode ? '0 0 0' : '255 255 255',
+        '--on-surface-color': darkMode ? '255 255 255' : '0 0 0',
         'font-family': 'Jost VF',
         'font-size': '16px',
         'width': '100vw',
