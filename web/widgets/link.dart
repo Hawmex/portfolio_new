@@ -13,7 +13,7 @@ class Link extends StatelessWidget {
   @override
   Widget build(final Context context) {
     return Container(
-      [Text(text), const Icon('open_in_new')],
+      children: [Text(text), const Icon('open_in_new')],
       onPress: (final event) => window.open(url, text),
       style: const Style({
         'display': 'inline-flex',

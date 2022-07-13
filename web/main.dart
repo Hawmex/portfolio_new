@@ -14,10 +14,10 @@ class App extends StatefulWidget {
   const App({super.key});
 
   @override
-  State createState() => AppState();
+  State createState() => _AppState();
 }
 
-class AppState extends State<App> {
+class _AppState extends State<App> {
   bool darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   void toggleDarkMode() => setState(() => darkMode = !darkMode);
@@ -25,11 +25,11 @@ class AppState extends State<App> {
   @override
   Widget build(final Context context) {
     return Container(
-      [
+      children: [
         TopBar(
           leading: [
             Container(
-              [
+              children: [
                 Button(
                   icon: darkMode ? 'dark_mode' : 'light_mode',
                   onPress: (final event) => toggleDarkMode(),
@@ -68,7 +68,7 @@ class AppState extends State<App> {
           ],
         ),
         Container(
-          [...aboutMe(), ...someOfMyProjects()],
+          children: [...aboutMe(), ...someOfMyProjects()],
           style: const Style({
             'display': 'flex',
             'flex-flow': 'column',
@@ -77,7 +77,7 @@ class AppState extends State<App> {
             'overflow-y': 'auto',
           }),
           animation: const Animation(
-            [
+            keyframes: [
               Style({'opacity': '0'}),
               Style({'opacity': '1'}),
             ],
@@ -85,7 +85,9 @@ class AppState extends State<App> {
             easing: Easing.cubicBezier(0.4, 0, 0.2, 1),
           ),
         ),
-        const BottomBar([Text('© Hamed Aarab, All Rights Reserved.')]),
+        const BottomBar(
+          children: [Text('© Hamed Aarab, All Rights Reserved.')],
+        ),
       ],
       style: Style({
         '--accent-color': '0 137 123',

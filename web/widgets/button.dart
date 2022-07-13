@@ -15,21 +15,21 @@ class Button extends StatefulWidget {
   });
 
   @override
-  State createState() => ButtonState();
+  State createState() => _ButtonState();
 }
 
-class ButtonState extends State<Button> {
+class _ButtonState extends State<Button> {
   String overlayBackground = 'transparent';
   String overlayTransitionDuration = '250ms';
 
   @override
   Widget build(final Context context) {
     return Container(
-      [
+      children: [
         if (widget.icon != null) Icon(widget.icon!),
         if (widget.text != null) Text(widget.text!),
         Container(
-          [],
+          children: [],
           style: Style({
             'position': 'absolute',
             'width': '100%',
@@ -78,7 +78,7 @@ class ButtonState extends State<Button> {
         'gap': '8px',
       }),
       animation: const Animation(
-        [
+        keyframes: [
           Style({'transform': 'scale(0.8)'}),
           Style({'transform': 'scale(1)'}),
         ],

@@ -4,7 +4,7 @@ import '../widgets/heading.dart';
 
 List<Widget> aboutMe() {
   return const [
-    Heading(Text('🙋‍♂️ About Me')),
+    Heading(child: Text('🙋‍♂️ About Me')),
     Text(
       'I\'m currently studying B.Sc. Industrial Engineering '
       'at Amirkabir University of Technology (Tehran Polytechnic).',

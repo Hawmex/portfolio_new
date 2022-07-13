@@ -3,12 +3,12 @@ import 'package:dawn/dawn.dart';
 class SubHeading extends StatelessWidget {
   final Widget child;
 
-  const SubHeading(this.child, {super.key});
+  const SubHeading({required this.child, super.key});
 
   @override
   Widget build(final Context context) {
     return Container(
-      [child],
+      children: [child],
       style: const Style({
         'font-size': '18px',
         'font-variation-settings': '"wght" 600',

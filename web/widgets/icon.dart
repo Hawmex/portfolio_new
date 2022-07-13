@@ -43,7 +43,7 @@ class Icon extends StatelessWidget implements Text {
       onPress: onPress,
       animation: animation ??
           const Animation(
-            [
+            keyframes: [
               Style({'transform': 'rotate(-90deg)'}),
               Style({'transform': 'rotate(0deg)'}),
             ],
